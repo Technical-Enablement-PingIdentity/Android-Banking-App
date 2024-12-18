@@ -1,0 +1,433 @@
+{
+  "meta": {
+    "origin": "https://test.forgeblocks.com/platform/?realm=alpha#/journeys/bacmobilereg",
+    "exportedBy": "test@forgerock.com",
+    "exportDate": "2024-12-12T20:29:40.359Z",
+    "exportTool": "platform-admin ui tree export",
+    "exportToolVersion": "1.0",
+    "treesSelectedForExport": ["bacmobilereg"],
+    "innerTreesIncluded": []
+  },
+  "trees": {
+    "bacmobilereg": {
+      "tree": {
+        "_id": "bacmobilereg",
+        "_rev": "-328818125",
+        "identityResource": "managed/alpha_user",
+        "uiConfig": {
+          "categories": "[]"
+        },
+        "entryNodeId": "cc50f5a0-1f87-4564-98cd-17e4fd700976",
+        "innerTreeOnly": false,
+        "nodes": {
+          "7b3c7afd-b44f-4ebc-b0db-a962d95ff385": {
+            "connections": {
+              "CREATED": "c7d4261e-a816-44ab-b2ec-9c30ba3746b7",
+              "FAILURE": "e301438c-0bd0-429c-ab0c-66126501069a"
+            },
+            "displayName": "Create Object",
+            "nodeType": "CreateObjectNode",
+            "x": 760,
+            "y": 133.015625
+          },
+          "830d6d16-0127-43a3-964b-d15527ae19cd": {
+            "connections": {
+              "false": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "true": "7b3c7afd-b44f-4ebc-b0db-a962d95ff385"
+            },
+            "displayName": "Set User Name to be e-mail",
+            "nodeType": "ScriptedDecisionNode",
+            "x": 463,
+            "y": 255.015625
+          },
+          "874303a9-6287-4559-b749-2f6efed964be": {
+            "connections": {
+              "error": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "failure": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "success": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+              "unsupported": "e301438c-0bd0-429c-ab0c-66126501069a"
+            },
+            "displayName": "WebAuthn Registration Node",
+            "nodeType": "WebAuthnRegistrationNode",
+            "x": 1335,
+            "y": 36.015625
+          },
+          "c7d4261e-a816-44ab-b2ec-9c30ba3746b7": {
+            "connections": {
+              "false": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "true": "874303a9-6287-4559-b749-2f6efed964be"
+            },
+            "displayName": "Identify Existing User",
+            "nodeType": "IdentifyExistingUserNode",
+            "x": 1019.4296875,
+            "y": 97.015625
+          },
+          "cc50f5a0-1f87-4564-98cd-17e4fd700976": {
+            "connections": {
+              "outcome": "830d6d16-0127-43a3-964b-d15527ae19cd"
+            },
+            "displayName": "Page Node",
+            "nodeType": "PageNode",
+            "x": 194,
+            "y": 235.015625
+          }
+        },
+        "description": "BAC Credomatic Mobile Application Registration Journey - this allows registering a FIDO device for authentication using Device Biometrics.\n",
+        "staticNodes": {
+          "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+            "x": 1808,
+            "y": 50
+          },
+          "e301438c-0bd0-429c-ab0c-66126501069a": {
+            "x": 1850,
+            "y": 376
+          },
+          "startNode": {
+            "x": 50,
+            "y": 250
+          }
+        },
+        "mustRun": false,
+        "enabled": true
+      },
+      "nodes": {
+        "7b3c7afd-b44f-4ebc-b0db-a962d95ff385": {
+          "_id": "7b3c7afd-b44f-4ebc-b0db-a962d95ff385",
+          "_rev": "996557289",
+          "identityResource": "managed/alpha_user",
+          "_type": {
+            "_id": "CreateObjectNode",
+            "name": "Create Object",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "CREATED",
+              "displayName": "Created"
+            },
+            {
+              "id": "FAILURE",
+              "displayName": "Failed"
+            }
+          ]
+        },
+        "830d6d16-0127-43a3-964b-d15527ae19cd": {
+          "_id": "830d6d16-0127-43a3-964b-d15527ae19cd",
+          "_rev": "21793245",
+          "script": "e5c302c8-f838-4698-87cc-d7225fc82454",
+          "outcomes": ["true", "false"],
+          "outputs": ["*"],
+          "inputs": ["*"],
+          "_type": {
+            "_id": "ScriptedDecisionNode",
+            "name": "Scripted Decision",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "true",
+              "displayName": "true"
+            },
+            {
+              "id": "false",
+              "displayName": "false"
+            }
+          ]
+        },
+        "874303a9-6287-4559-b749-2f6efed964be": {
+          "_id": "874303a9-6287-4559-b749-2f6efed964be",
+          "_rev": "1923526024",
+          "trustStoreAlias": "androiddebugkey",
+          "relyingPartyName": "BAC Credomatic",
+          "maxSavedDevices": 0,
+          "generateRecoveryCodes": true,
+          "relyingPartyDomain": "bacciambl.encore.forgerock.com",
+          "storeAttestationDataInTransientState": false,
+          "origins": [],
+          "userVerificationRequirement": "PREFERRED",
+          "postponeDeviceProfileStorage": false,
+          "excludeCredentials": false,
+          "requiresResidentKey": false,
+          "authenticatorAttachment": "PLATFORM",
+          "asScript": false,
+          "validateFidoU2fAaguid": false,
+          "acceptedSigningAlgorithms": ["ES256", "RS256"],
+          "attestationPreference": "NONE",
+          "enforceRevocationCheck": false,
+          "timeout": 60,
+          "_type": {
+            "_id": "WebAuthnRegistrationNode",
+            "name": "WebAuthn Registration Node",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "unsupported",
+              "displayName": "Unsupported"
+            },
+            {
+              "id": "success",
+              "displayName": "Success"
+            },
+            {
+              "id": "failure",
+              "displayName": "Failure"
+            },
+            {
+              "id": "error",
+              "displayName": "Client Error"
+            }
+          ]
+        },
+        "c7d4261e-a816-44ab-b2ec-9c30ba3746b7": {
+          "_id": "c7d4261e-a816-44ab-b2ec-9c30ba3746b7",
+          "_rev": "1065982079",
+          "identityAttribute": "mail",
+          "identifier": "userName",
+          "_type": {
+            "_id": "IdentifyExistingUserNode",
+            "name": "Identify Existing User",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "true",
+              "displayName": "True"
+            },
+            {
+              "id": "false",
+              "displayName": "False"
+            }
+          ]
+        },
+        "cc50f5a0-1f87-4564-98cd-17e4fd700976": {
+          "_id": "cc50f5a0-1f87-4564-98cd-17e4fd700976",
+          "_rev": "1564561680",
+          "nodes": [
+            {
+              "_id": "64cae6d8-e783-49aa-8cde-e1e9394f1e60",
+              "nodeType": "AttributeCollectorNode",
+              "displayName": "Collect Data from User"
+            },
+            {
+              "_id": "9433d819-807c-4bc5-8d7e-443e5e9ac2f4",
+              "nodeType": "ValidatedPasswordNode",
+              "displayName": "Platform Password"
+            }
+          ],
+          "pageDescription": {},
+          "pageHeader": {},
+          "_type": {
+            "_id": "PageNode",
+            "name": "Page Node",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        }
+      },
+      "innerNodes": {
+        "64cae6d8-e783-49aa-8cde-e1e9394f1e60": {
+          "_id": "64cae6d8-e783-49aa-8cde-e1e9394f1e60",
+          "_rev": "1328637295",
+          "attributesToCollect": ["mail", "givenName", "sn"],
+          "identityAttribute": "userName",
+          "validateInputs": false,
+          "required": true,
+          "_type": {
+            "_id": "AttributeCollectorNode",
+            "name": "Attribute Collector",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        },
+        "9433d819-807c-4bc5-8d7e-443e5e9ac2f4": {
+          "_id": "9433d819-807c-4bc5-8d7e-443e5e9ac2f4",
+          "_rev": "-1213102908",
+          "passwordAttribute": "password",
+          "validateInput": true,
+          "_type": {
+            "_id": "ValidatedPasswordNode",
+            "name": "Platform Password",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        }
+      },
+      "scripts": {
+        "e5c302c8-f838-4698-87cc-d7225fc82454": {
+          "_id": "e5c302c8-f838-4698-87cc-d7225fc82454",
+          "name": "EmailAsUsername",
+          "description": "null",
+          "script": "\"var objectAttributes = sharedState.get(\\\"objectAttributes\\\")\\nvar userName = objectAttributes.get(\\\"userName\\\")\\nvar mail = objectAttributes.get(\\\"mail\\\");\\n\\nif(userName){\\n  //Form Fill\\n  objectAttributes.put(\\\"mail\\\", userName)\\n} else {\\n  //Social\\n  objectAttributes.put(\\\"userName\\\", objectAttributes.get(\\\"mail\\\"))\\n}\\n\\n\\nsharedState.put(\\\"objectAttributes\\\", objectAttributes);\\nsharedState.put(\\\"username\\\", mail);\\nsharedState.put(\\\"mail\\\", mail);\\n\\noutcome = \\\"true\\\";\"",
+          "default": false,
+          "language": "JAVASCRIPT",
+          "context": "AUTHENTICATION_TREE_DECISION_NODE",
+          "createdBy": "null",
+          "creationDate": 0,
+          "lastModifiedBy": "null",
+          "lastModifiedDate": 0,
+          "evaluatorVersion": "1.0"
+        }
+      },
+      "emailTemplates": {},
+      "socialIdentityProviders": {},
+      "themes": [
+        {
+          "_id": "8fa86bf1-20ff-40af-80e5-d8d5f043cfe8",
+          "accountCardBackgroundColor": "#ffffff",
+          "accountCardHeaderColor": "#D7002A",
+          "accountCardInnerBorderColor": "#D7002A",
+          "accountCardInputBackgroundColor": "#ffffff",
+          "accountCardInputBorderColor": "#D7002A",
+          "accountCardInputLabelColor": "#5e6d82",
+          "accountCardInputSelectColor": "#e4f4fd",
+          "accountCardInputSelectHoverColor": "#f6f8fa",
+          "accountCardInputTextColor": "#23282e",
+          "accountCardOuterBorderColor": "#FFB3BF",
+          "accountCardShadow": "6",
+          "accountCardTabActiveBorderColor": "#D7002A",
+          "accountCardTabActiveColor": "#FF6680",
+          "accountCardTextColor": "#5e6d82",
+          "accountFooter": "<div class=\"d-flex justify-content-center py-4 w-100\"><span class=\"pr-1\">© 2021</span>\n<a href=\"#\" target=\"_blank\" class=\"text-body\">My Company, Inc</a><a href=\"#\" target=\"_blank\" style=\"color: #0000ee\" class=\"pl-3 text-body\">Privacy Policy</a><a href=\"#\" target=\"_blank\" style=\"color: #0000ee\" class=\"pl-3 text-body\">Terms & Conditions</a></div>",
+          "accountFooterEnabled": false,
+          "accountFooterScriptTag": "",
+          "accountFooterScriptTagEnabled": false,
+          "accountNavigationBackgroundColor": "#ffffff",
+          "accountNavigationTextColor": "#D7002A",
+          "accountNavigationToggleBorderColor": "#e7eef4",
+          "accountPageSections": {
+            "accountControls": {
+              "enabled": false
+            },
+            "accountSecurity": {
+              "enabled": true,
+              "subsections": {
+                "password": {
+                  "enabled": true
+                },
+                "securityQuestions": {
+                  "enabled": false
+                },
+                "twoStepVerification": {
+                  "enabled": true
+                },
+                "username": {
+                  "enabled": true
+                }
+              }
+            },
+            "consent": {
+              "enabled": true
+            },
+            "oauthApplications": {
+              "enabled": true
+            },
+            "personalInformation": {
+              "enabled": true
+            },
+            "preferences": {
+              "enabled": true
+            },
+            "social": {
+              "enabled": false
+            },
+            "trustedDevices": {
+              "enabled": true
+            }
+          },
+          "accountTableRowHoverColor": "#f6f8fa",
+          "backgroundColor": "#324054",
+          "backgroundImage": "https://www.baccredomatic.com/sites/default/files/styles/real_estate_1000_560_/public/2021-09/GT-BANNER-PRINCIPAL-MUJERES-080921_0.jpg?itok=KI33p58K",
+          "bodyText": "#DB0025",
+          "boldLinks": false,
+          "buttonRounded": 5,
+          "dangerColor": "#f7685b",
+          "favicon": "",
+          "fontFamily": "Open Sans",
+          "isDefault": false,
+          "journeyCardBackgroundColor": "#ffffff",
+          "journeyCardBorderRadius": "18",
+          "journeyCardHeaderBackgroundColor": "#ffffff",
+          "journeyCardShadow": "14",
+          "journeyCardTextColor": "#DB0025",
+          "journeyCardTitleColor": "#B7002A",
+          "journeyFloatingLabels": true,
+          "journeyFocusFirstFocusableItemEnabled": false,
+          "journeyFooter": "<div class=\"d-flex justify-content-center py-4 w-100\"><span class=\"pr-1\">© 2021</span>\n<a href=\"#\" target=\"_blank\" class=\"text-body\">My Company, Inc</a><a href=\"#\" target=\"_blank\" style=\"color: #0000ee\" class=\"pl-3 text-body\">Privacy Policy</a><a href=\"#\" target=\"_blank\" style=\"color: #0000ee\" class=\"pl-3 text-body\">Terms & Conditions</a></div>",
+          "journeyFooterEnabled": false,
+          "journeyFooterScriptTag": "",
+          "journeyFooterScriptTagEnabled": false,
+          "journeyHeader": "<div class=\"d-flex justify-content-center py-4 flex-grow-1\">Header Content</div>",
+          "journeyHeaderEnabled": false,
+          "journeyHeaderSkipLinkEnabled": false,
+          "journeyInputBackgroundColor": "#ffffff",
+          "journeyInputBorderColor": "#c0c9d5",
+          "journeyInputLabelColor": "#5e6d82",
+          "journeyInputSelectColor": "#e4f4fd",
+          "journeyInputSelectHoverColor": "#f6f8fa",
+          "journeyInputTextColor": "#23282e",
+          "journeyJustifiedContent": "",
+          "journeyJustifiedContentEnabled": false,
+          "journeyJustifiedContentMobileViewEnabled": false,
+          "journeyLayout": "card",
+          "journeyRememberMeEnabled": false,
+          "journeyRememberMeLabel": "",
+          "journeySignInButtonPosition": "flex-column",
+          "journeyTheaterMode": false,
+          "linkActiveColor": "#0c85cf",
+          "linkColor": "#109cf1",
+          "linkedTrees": [
+            "PingVerifyRegistration",
+            "JITMigrationBAC",
+            "bacmobilereg",
+            "bacOpenFGALogin"
+          ],
+          "logo": "https://assets-global.website-files.com/5e2f2362e479664d4e15718a/619e46519eec5412bef61eb2_bac.png",
+          "logoAltText": "BAC Credomatic",
+          "logoEnabled": true,
+          "logoHeight": "100",
+          "logoProfile": "https://assets-global.website-files.com/5e2f2362e479664d4e15718a/619e46519eec5412bef61eb2_bac.png",
+          "logoProfileAltText": "BAC Credomatic",
+          "logoProfileCollapsed": "https://assets-global.website-files.com/5e2f2362e479664d4e15718a/619e46519eec5412bef61eb2_bac.png",
+          "logoProfileCollapsedAltText": "BAC Credomatic",
+          "logoProfileCollapsedHeight": "40",
+          "logoProfileHeight": "40",
+          "name": "baccred",
+          "pageTitle": "#D7002A",
+          "primaryColor": "#DB0025",
+          "primaryOffColor": "#B7002A",
+          "profileBackgroundColor": "#FFB3BF",
+          "profileMenuHighlightColor": "#FFB3BF",
+          "profileMenuHoverColor": "#D7002A",
+          "profileMenuHoverTextColor": "#ffffff",
+          "profileMenuTextHighlightColor": "#DB0025",
+          "secondaryColor": "#69788b",
+          "successColor": "#2ed47a",
+          "switchBackgroundColor": "#c0c9d5",
+          "textColor": "#ffffff",
+          "topBarBackgroundColor": "#ffffff",
+          "topBarBorderColor": "#e7eef4",
+          "topBarHeaderColor": "#23282e",
+          "topBarTextColor": "#69788b"
+        }
+      ],
+      "saml2Entities": {},
+      "circlesOfTrust": {}
+    }
+  }
+}

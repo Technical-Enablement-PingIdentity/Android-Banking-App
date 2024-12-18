@@ -1,0 +1,166 @@
+{
+  "name": "01-bac-transactional-authz-sdk-jme",
+  "baseURI": "http://ig:80",
+  "condition": "${matches(request.uri.path, '^/transfer')}",
+  "handler": "Chain-1",
+  "globalDecorators": {
+    "capture": ["all"]
+  },
+  "properties": {
+    "amInstanceUrl": "https://openam-bacciambl.forgeblocks.com/am",
+    "tenantCookieName": "19c6bdf32c29aaf"
+  },
+  "heap": [
+    {
+      "type": "BaseUriDecorator",
+      "name": "baseUri"
+    },
+    {
+      "type": "TimerDecorator",
+      "name": "timer",
+      "config": {
+        "timeUnit": "ms"
+      }
+    },
+    {
+      "type": "Base64EncodedSecretStore",
+      "name": "Base64EncodedSecretStore-1",
+      "config": {
+        "secrets": {
+          "agent.password": "<password>"
+        }
+      }
+    },
+    {
+      "type": "CaptureDecorator",
+      "name": "capture",
+      "config": {
+        "captureEntity": true,
+        "captureContext": true,
+        "maxEntityLength": 524288
+      }
+    },
+    {
+      "name": "Chain-1",
+      "type": "Chain",
+      "config": {
+        "handler": "StaticResponseHandler-1",
+        "filters": [
+          "CORS",
+          "Set AM Cookie in IG Domain",
+          "Replace SSO Cookie Header",
+          "SSO",
+          "PolicyEnforcementFilter-1"
+        ]
+      }
+    },
+    {
+      "type": "StaticResponseHandler",
+      "name": "StaticResponseHandler-1",
+      "config": {
+        "status": 200,
+        "reason": "OK",
+        "entity": "{\n  \"result\": \"Transfer complete\",\n  \"data\": {\n    \"origin\": \"${contexts.attributes.attributes.srcAccount}\",\n    \"dest\": \"${contexts.attributes.attributes.destAccount}\",\n    \"amount\": \"${contexts.attributes.attributes.amount}\"\n  }\n}",
+        "headers": {
+          "Content-Type": ["application/json"]
+        }
+      }
+    },
+    {
+      "name": "CORS",
+      "type": "CorsFilter",
+      "config": {
+        "policies": [
+          {
+            "origins": "*",
+            "acceptedMethods": "*",
+            "acceptedHeaders": "*",
+            "allowCredentials": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "AmService-1",
+      "type": "AmService",
+      "config": {
+        "url": "https://openam-bacciambl.forgeblocks.com/am",
+        "realm": "/alpha",
+        "ssoTokenHeader": "19c6bdf32c29aaf",
+        "secretsProvider": "Base64EncodedSecretStore-1",
+        "agent": {
+          "username": "bac-ig",
+          "passwordSecretId": "agent.password"
+        },
+        "sessionCache": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "PolicyEnforcementFilter-1",
+      "type": "PolicyEnforcementFilter",
+      "config": {
+        "amService": "AmService-1",
+        "ssoTokenSubject": "${contexts.attributes.attributes.ssoCookie}",
+        "cache": {
+          "enabled": false
+        },
+        "application": "data",
+        "environment": {
+          "TxId": ["${request.headers['txid'][0]}"]
+        }
+      },
+      "capture": ["all"]
+    },
+    {
+      "type": "ScriptableFilter",
+      "name": "Set AM Cookie in IG Domain",
+      "config": {
+        "type": "application/x-groovy",
+        "source": [
+          "def ssoCookie = request.cookies[\"tokenId\"][0].value",
+          "println \"The incoming SSO Token Cookie is \" + ssoCookie + \" with a name of \" + cookieName",
+          "",
+          "contexts.attributes.attributes.ssoCookie = ssoCookie",
+          "println \"Request headers are \" + request.getHeaders()",
+          "def srcAccount = request.getEntity().getJson()",
+          ".get(\"srcAcct\");",
+          "def destAccount = request.getEntity().getJson().get(\"destAcct\")",
+          "",
+          "def amount = request.getEntity().getJson().get(\"amount\")",
+          "",
+          "println \"Incoming data: Source Acct ${srcAccount} Destination: ${destAccount}  Transfer Amount: ${amount}\"",
+          "contexts.attributes.attributes.srcAccount = srcAccount",
+          "contexts.attributes.attributes.destAccount = destAccount",
+          "contexts.attributes.attributes.amount = amount",
+          "",
+          "return next.handle(context, request)"
+        ],
+        "args": {
+          "cookieName": "${tenantCookieName}"
+        }
+      }
+    },
+    {
+      "name": "SSO",
+      "type": "SingleSignOnFilter",
+      "config": {
+        "amService": "AmService-1"
+      }
+    },
+    {
+      "name": "Replace SSO Cookie Header",
+      "type": "HeaderFilter",
+      "config": {
+        "messageType": "REQUEST",
+        "remove": ["Cookie"],
+        "add": {
+          "Cookie": [
+            "${tenantCookieName}=${contexts.attributes.attributes.ssoCookie}"
+          ]
+        }
+      }
+    }
+  ]
+}
