@@ -24,8 +24,6 @@ samples, guidance on mobile development, and a full API reference.
 
 - Install the necessary components to Android Studio and create a virtual Android device by following the steps in [this document](https://docs.flutter.dev/get-started/install/macos/mobile-android#configure-android-development).
 
-https://docs.flutter.dev/tools/vs-code?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMn5k6z0D8vB1V17WoDQGhbYTy1rNaLkyNs7_Q2DbEUfhH6QxcthYuhoCka8QAvD_BwE&gclsrc=aw.ds
-
 ### Launch Application
 
 Once you've cloned this repo, open the project in Android Studio.
