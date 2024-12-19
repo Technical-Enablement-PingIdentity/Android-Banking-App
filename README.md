@@ -2,22 +2,22 @@
 
 ## Getting Started
 
-A few resources to get you started if this is your first Flutter project:
+### Summary of Setup
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Install necessary SDKs and development tools
+- Setup Android Studio and create a target device using the emulator within Android Studio
+- Launch the application in Android Studio
+- Setup a self-managed environment and a cloud tenant using the configuration files provided in `/config-files` as a reference
+- Configure the authentication nodes in your journeys to use mobile biometrics
+- Update the app code to point to your own tenant URLs
 
 ### Install Development Tools
 
-- Install Android Studio and Git, follow the Flutter documentation to install the recommended versions.
+- Install Android Studio and Git, follow the Flutter documentation to install the recommended versions. You should already have Git installed on your laptop, to check the installation version, type `git -v` into the command line.
 
 ### Install Flutter
 
-- Download and install Flutter according to the [Flutter documentation](https://docs.flutter.dev/get-started/install/macos/mobile-android#install-the-flutter-sdk). You can use VSCode to install, but it is not necessary if you are already using Android Studio.
+- Download and install Flutter according to the [Flutter documentation](https://docs.flutter.dev/get-started/install/macos/mobile-android#install-the-flutter-sdk).
 - Run `flutter doctor` to verify your installation of all necessary components.
 
 ### Setup Android Studio and Create Target Device
@@ -55,3 +55,14 @@ You will want to point this application to your own tenant and self-managed envi
 Please Note: In order for the WebAuthn journey nodes to work natively with the app, you will need to ensure the steps in [this document](https://docs.pingidentity.com/sdks/latest/sdks/use-cases/mobile-biometrics/android/index.html) have been followed.
 
 To test the application on an actual Android device, follow the steps outlined in [this document](https://developer.android.com/codelabs/basic-android-kotlin-compose-connect-device#0) to connect via cable or Wi-Fi.
+
+## Additional Resources
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
