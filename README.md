@@ -38,11 +38,13 @@ From the top menu bar, click the play button to run main.dart. You can also clic
 
 If you get an error that your gradle version is incompatible, open the project in Android Studio. Upon opening the project, you will be prompted to upgrade gradle and re-sync the project. Click to do so and follow any remaining steps recommended in the UI. Then, you can try running the app again as described above.
 
+If you are experiencing errors with gradle, and you're unable to run a gradle sync, try opening just the `android` folder of this repo within Android Studio and try again.
+
 If you upgrade gradle and see any errors related to updating the compileSDK version, you can adjust the compileSDK version in the build.gradle file located in the /android/app directory.
 
 ### Create and Point to Your Own Environment
 
-You will want to point this application to your own tenant and self-managed environment. In order to do so, you will need to create a self managed environment in encore with IG studio. This application has been tested against version 2024.3.4 of IG Studio. It will need this version or later in order to run properly.
+You will want to point this application to your own AIC tenant and IG instance. In order to do so, you will need to create a Baseline Demo environment in Encore, which comes with both.
 
 1. In IG, you will need to configure a /transfer route. Please use the demo-app-ig-route-transfer.json file located in /config-files as a reference for your own route configuration. The following values will need to be updated:
    - `baseURI`: Set to `http://baseline-demo:8082`.
