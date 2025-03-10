@@ -1,0 +1,23 @@
+{
+  "name": "01-asset-links",
+  "baseURI": "http://baseline-demo:8082",
+  "condition": "${matches(request.uri.path, '^/.well-known')}",
+  "handler": "Assets-Link-JSON",
+  "globalDecorators": {
+    "capture": [
+      "all"
+    ]
+  },
+  "heap": [
+    {
+      "name": "Assets-Link-JSON",
+      "type": "ResourceHandler",
+      "config": {
+        "directories": [
+          "/var/ig/config/public"
+        ],
+        "basePath": "/.well-known"
+      }
+    }
+  ]
+}

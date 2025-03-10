@@ -39,7 +39,7 @@ class _TransferPageState extends State<TransferPage> {
       destAccount = _controllers[1].text;
       amount = double.parse(_controllers[2].text);
       //Call the default login tree.
-      final String result = await platform.invokeMethod('callEndpoint', ["https://alexsm.encore.forgerock.com/ig/transfer?authType=${authnType}",'POST', '{"srcAcct": $srcAccount, "destAcct": $destAccount, "amount": $amount}', "true"]);
+      final String result = await platform.invokeMethod('callEndpoint', ["https://cb-0603-bsa.encore.pingidentity.com/transfer?authType=${authnType}",'POST', '{"srcAcct": "$srcAccount", "destAcct": "$destAccount", "amount": $amount}', "true"]);
       debugPrint("Final response $result");
       /*Map<String, dynamic> frNodeMap = jsonDecode(result);
       var frNode = FRNode.fromJson(frNodeMap);
@@ -169,25 +169,6 @@ class _TransferPageState extends State<TransferPage> {
     );
   }
 
-  Widget _okWithVerify(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.all(15.0),
-      height: 60,
-      child: TextButton(
-        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
-        onPressed: () async {
-          _startTransaction("verify");
-        },
-        child: const Text(
-          "Not registered? Create an account now.",
-          style: TextStyle(color: Colors.blueAccent),
-        ),
-      ),
-    );
-  }
-
   Widget _okWithFido(BuildContext context) {
     return Container(
       color: Colors.transparent,
@@ -201,7 +182,7 @@ class _TransferPageState extends State<TransferPage> {
         },
         child:
         const Text(
-          "Register with Fido",
+          "Transfer with Fido",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -228,8 +209,7 @@ class _TransferPageState extends State<TransferPage> {
           child: Column(
             children: [
               _listView(context),
-              _okWithFido(context),
-              _okWithVerify(context)
+              _okWithFido(context)
             ],
           ),
         ),
