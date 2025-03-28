@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "origin": "https://test.forgeblocks.com/platform/?realm=alpha#/journeys/bacmobilelogin-alex",
+    "exportedBy": "test@forgerock.com",
+    "exportDate": "2024-12-12T20:28:34.042Z",
+    "exportTool": "platform-admin ui tree export",
+    "exportToolVersion": "1.0",
+    "treesSelectedForExport": ["bacmobilelogin-alex"],
+    "innerTreesIncluded": []
+  },
+  "trees": {
+    "bacmobilelogin-alex": {
+      "tree": {
+        "_id": "bacmobilelogin-alex",
+        "_rev": "-505234280",
+        "identityResource": "managed/alpha_user",
+        "uiConfig": {
+          "categories": "[\"webauthn\",\"mobile\",\"android\",\"custom domains\",\"device biometrics\"]"
+        },
+        "entryNodeId": "1d9d4be8-571e-44e6-b88b-788ec27a9ee9",
+        "innerTreeOnly": false,
+        "nodes": {
+          "1ab14ee1-f3d5-4b34-a934-4c6c3df68f54": {
+            "connections": {
+              "false": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "true": "a7902e28-5388-43f0-a879-59013b158949"
+            },
+            "displayName": "Data Store Decision",
+            "nodeType": "DataStoreDecisionNode",
+            "x": 1092,
+            "y": 237.015625
+          },
+          "1d9d4be8-571e-44e6-b88b-788ec27a9ee9": {
+            "connections": {
+              "outcome": "275563eb-2f1f-43e1-bed0-93db3b801e56"
+            },
+            "displayName": "Page Node",
+            "nodeType": "PageNode",
+            "x": 280,
+            "y": 206.015625
+          },
+          "275563eb-2f1f-43e1-bed0-93db3b801e56": {
+            "connections": {
+              "true": "42dea5a8-0aa7-4257-a8d6-6348cc3646fd"
+            },
+            "displayName": "EMail As UserName",
+            "nodeType": "ScriptedDecisionNode",
+            "x": 552,
+            "y": 261.015625
+          },
+          "42dea5a8-0aa7-4257-a8d6-6348cc3646fd": {
+            "connections": {
+              "false": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "true": "1ab14ee1-f3d5-4b34-a934-4c6c3df68f54"
+            },
+            "displayName": "Identify Existing User",
+            "nodeType": "IdentifyExistingUserNode",
+            "x": 760.4296875,
+            "y": 448.015625
+          },
+          "a7902e28-5388-43f0-a879-59013b158949": {
+            "connections": {
+              "error": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "failure": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "noDevice": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "success": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+              "unsupported": "e301438c-0bd0-429c-ab0c-66126501069a"
+            },
+            "displayName": "WebAuthn Authentication Node",
+            "nodeType": "WebAuthnAuthenticationNode",
+            "x": 1357,
+            "y": 21
+          }
+        },
+        "description": "Journey for Bac Credomatic's Mobile Authentication using WebAuthn and Device Biometrics.",
+        "staticNodes": {
+          "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+            "x": 1779,
+            "y": 102
+          },
+          "e301438c-0bd0-429c-ab0c-66126501069a": {
+            "x": 1893,
+            "y": 338
+          },
+          "startNode": {
+            "x": 50,
+            "y": 250
+          }
+        },
+        "mustRun": false,
+        "enabled": true
+      },
+      "nodes": {
+        "1ab14ee1-f3d5-4b34-a934-4c6c3df68f54": {
+          "_id": "1ab14ee1-f3d5-4b34-a934-4c6c3df68f54",
+          "_rev": "-1775725927",
+          "_type": {
+            "_id": "DataStoreDecisionNode",
+            "name": "Data Store Decision",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "true",
+              "displayName": "True"
+            },
+            {
+              "id": "false",
+              "displayName": "False"
+            }
+          ]
+        },
+        "1d9d4be8-571e-44e6-b88b-788ec27a9ee9": {
+          "_id": "1d9d4be8-571e-44e6-b88b-788ec27a9ee9",
+          "_rev": "1486907776",
+          "nodes": [
+            {
+              "_id": "ac9eb82c-ae54-40ad-8261-9248324de4d3",
+              "nodeType": "ValidatedUsernameNode",
+              "displayName": "Platform Username"
+            },
+            {
+              "_id": "b5951e48-0da7-4941-951f-3821b55384a7",
+              "nodeType": "ValidatedPasswordNode",
+              "displayName": "Platform Password"
+            }
+          ],
+          "pageDescription": {},
+          "pageHeader": {},
+          "_type": {
+            "_id": "PageNode",
+            "name": "Page Node",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        },
+        "275563eb-2f1f-43e1-bed0-93db3b801e56": {
+          "_id": "275563eb-2f1f-43e1-bed0-93db3b801e56",
+          "_rev": "1191809851",
+          "script": "e5c302c8-f838-4698-87cc-d7225fc82454",
+          "outcomes": ["true"],
+          "outputs": ["*"],
+          "inputs": ["*"],
+          "_type": {
+            "_id": "ScriptedDecisionNode",
+            "name": "Scripted Decision",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "true",
+              "displayName": "true"
+            }
+          ]
+        },
+        "42dea5a8-0aa7-4257-a8d6-6348cc3646fd": {
+          "_id": "42dea5a8-0aa7-4257-a8d6-6348cc3646fd",
+          "_rev": "-1174513419",
+          "identityAttribute": "mail",
+          "identifier": "userName",
+          "_type": {
+            "_id": "IdentifyExistingUserNode",
+            "name": "Identify Existing User",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "true",
+              "displayName": "True"
+            },
+            {
+              "id": "false",
+              "displayName": "False"
+            }
+          ]
+        },
+        "a7902e28-5388-43f0-a879-59013b158949": {
+          "_id": "a7902e28-5388-43f0-a879-59013b158949",
+          "_rev": "-1798342617",
+          "requiresResidentKey": false,
+          "asScript": false,
+          "relyingPartyDomain": "bacciambl.encore.forgerock.com",
+          "origins": [],
+          "userVerificationRequirement": "PREFERRED",
+          "isRecoveryCodeAllowed": false,
+          "timeout": 60,
+          "_type": {
+            "_id": "WebAuthnAuthenticationNode",
+            "name": "WebAuthn Authentication Node",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "unsupported",
+              "displayName": "Unsupported"
+            },
+            {
+              "id": "noDevice",
+              "displayName": "No Device Registered"
+            },
+            {
+              "id": "success",
+              "displayName": "Success"
+            },
+            {
+              "id": "failure",
+              "displayName": "Failure"
+            },
+            {
+              "id": "error",
+              "displayName": "Client Error"
+            }
+          ]
+        }
+      },
+      "innerNodes": {
+        "ac9eb82c-ae54-40ad-8261-9248324de4d3": {
+          "_id": "ac9eb82c-ae54-40ad-8261-9248324de4d3",
+          "_rev": "1130032096",
+          "usernameAttribute": "userName",
+          "validateInput": false,
+          "_type": {
+            "_id": "ValidatedUsernameNode",
+            "name": "Platform Username",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        },
+        "b5951e48-0da7-4941-951f-3821b55384a7": {
+          "_id": "b5951e48-0da7-4941-951f-3821b55384a7",
+          "_rev": "-204886945",
+          "passwordAttribute": "password",
+          "validateInput": false,
+          "_type": {
+            "_id": "ValidatedPasswordNode",
+            "name": "Platform Password",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        }
+      },
+      "scripts": {
+        "e5c302c8-f838-4698-87cc-d7225fc82454": {
+          "_id": "e5c302c8-f838-4698-87cc-d7225fc82454",
+          "name": "EmailAsUsername",
+          "description": "null",
+          "script": "\"var objectAttributes = sharedState.get(\\\"objectAttributes\\\")\\nvar userName = objectAttributes.get(\\\"userName\\\")\\nvar mail = objectAttributes.get(\\\"mail\\\");\\n\\nif(userName){\\n  //Form Fill\\n  objectAttributes.put(\\\"mail\\\", userName)\\n} else {\\n  //Social\\n  objectAttributes.put(\\\"userName\\\", objectAttributes.get(\\\"mail\\\"))\\n}\\n\\n\\nsharedState.put(\\\"objectAttributes\\\", objectAttributes);\\nsharedState.put(\\\"username\\\", mail);\\nsharedState.put(\\\"mail\\\", mail);\\n\\noutcome = \\\"true\\\";\"",
+          "default": false,
+          "language": "JAVASCRIPT",
+          "context": "AUTHENTICATION_TREE_DECISION_NODE",
+          "createdBy": "null",
+          "creationDate": 0,
+          "lastModifiedBy": "null",
+          "lastModifiedDate": 0,
+          "evaluatorVersion": "1.0"
+        }
+      },
+      "emailTemplates": {},
+      "socialIdentityProviders": {},
+      "themes": [],
+      "saml2Entities": {},
+      "circlesOfTrust": {}
+    }
+  }
+}

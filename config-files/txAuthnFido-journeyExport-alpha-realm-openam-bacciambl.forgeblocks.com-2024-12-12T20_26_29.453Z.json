@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "origin": "https://test.forgeblocks.com/platform/?realm=alpha#/journeys/txAuthnFido",
+    "exportedBy": "test@forgerock.com",
+    "exportDate": "2024-12-12T20:26:29.453Z",
+    "exportTool": "platform-admin ui tree export",
+    "exportToolVersion": "1.0",
+    "treesSelectedForExport": ["txAuthnFido"],
+    "innerTreesIncluded": []
+  },
+  "trees": {
+    "txAuthnFido": {
+      "tree": {
+        "_id": "txAuthnFido",
+        "_rev": "-1700648156",
+        "identityResource": "managed/alpha_user",
+        "uiConfig": {
+          "categories": "[\"mfa\",\"Authentication\",\"Authorization\",\"SDK\",\"Transactional Authorization\"]"
+        },
+        "entryNodeId": "5cb9117b-4e36-4eb6-8c1d-6b1613b236e2",
+        "innerTreeOnly": false,
+        "nodes": {
+          "5223ac50-7272-4f13-9980-2ef7bc312d37": {
+            "connections": {
+              "error": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "failure": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "noDevice": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "success": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+              "unsupported": "e301438c-0bd0-429c-ab0c-66126501069a"
+            },
+            "displayName": "WebAuthn Authentication Node",
+            "nodeType": "WebAuthnAuthenticationNode",
+            "x": 774,
+            "y": 64.015625
+          },
+          "5cb9117b-4e36-4eb6-8c1d-6b1613b236e2": {
+            "connections": {
+              "outcome": "d4a0dedf-37cd-41ce-8aea-cc661a6aeb93"
+            },
+            "displayName": "Get Session Data",
+            "nodeType": "SessionDataNode",
+            "x": 213,
+            "y": 254.015625
+          },
+          "d4a0dedf-37cd-41ce-8aea-cc661a6aeb93": {
+            "connections": {
+              "false": "e301438c-0bd0-429c-ab0c-66126501069a",
+              "true": "5223ac50-7272-4f13-9980-2ef7bc312d37"
+            },
+            "displayName": "Identify Existing User",
+            "nodeType": "IdentifyExistingUserNode",
+            "x": 475.4296875,
+            "y": 240.015625
+          }
+        },
+        "description": "Performs a Web Authentication Flow (FIDO) to authorize a transaction",
+        "staticNodes": {
+          "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+            "x": 1185,
+            "y": 195
+          },
+          "e301438c-0bd0-429c-ab0c-66126501069a": {
+            "x": 1177,
+            "y": 297
+          },
+          "startNode": {
+            "x": 50,
+            "y": 250
+          }
+        },
+        "mustRun": false,
+        "enabled": true
+      },
+      "nodes": {
+        "5223ac50-7272-4f13-9980-2ef7bc312d37": {
+          "_id": "5223ac50-7272-4f13-9980-2ef7bc312d37",
+          "_rev": "-1233648493",
+          "requiresResidentKey": false,
+          "asScript": false,
+          "relyingPartyDomain": "bacciambl.encore.forgerock.com",
+          "origins": [],
+          "userVerificationRequirement": "PREFERRED",
+          "isRecoveryCodeAllowed": false,
+          "timeout": 60,
+          "_type": {
+            "_id": "WebAuthnAuthenticationNode",
+            "name": "WebAuthn Authentication Node",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "unsupported",
+              "displayName": "Unsupported"
+            },
+            {
+              "id": "noDevice",
+              "displayName": "No Device Registered"
+            },
+            {
+              "id": "success",
+              "displayName": "Success"
+            },
+            {
+              "id": "failure",
+              "displayName": "Failure"
+            },
+            {
+              "id": "error",
+              "displayName": "Client Error"
+            }
+          ]
+        },
+        "5cb9117b-4e36-4eb6-8c1d-6b1613b236e2": {
+          "_id": "5cb9117b-4e36-4eb6-8c1d-6b1613b236e2",
+          "_rev": "129040437",
+          "sessionDataKey": "UserToken",
+          "sharedStateKey": "userName",
+          "_type": {
+            "_id": "SessionDataNode",
+            "name": "Get Session Data",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "outcome",
+              "displayName": "Outcome"
+            }
+          ]
+        },
+        "d4a0dedf-37cd-41ce-8aea-cc661a6aeb93": {
+          "_id": "d4a0dedf-37cd-41ce-8aea-cc661a6aeb93",
+          "_rev": "-1822835996",
+          "identityAttribute": "mail",
+          "identifier": "userName",
+          "_type": {
+            "_id": "IdentifyExistingUserNode",
+            "name": "Identify Existing User",
+            "collection": true
+          },
+          "_outcomes": [
+            {
+              "id": "true",
+              "displayName": "True"
+            },
+            {
+              "id": "false",
+              "displayName": "False"
+            }
+          ]
+        }
+      },
+      "innerNodes": {},
+      "scripts": {},
+      "emailTemplates": {},
+      "socialIdentityProviders": {},
+      "themes": [],
+      "saml2Entities": {},
+      "circlesOfTrust": {}
+    }
+  }
+}
