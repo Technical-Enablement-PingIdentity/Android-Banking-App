@@ -1,4 +1,4 @@
-# latam_mobile_android
+# Android-Banking-App
 
 ## Getting Started
 
@@ -30,28 +30,30 @@ Once you've cloned this repo, open the project in Android Studio.
 
 Run `flutter pub get` to fetch all necessary packages.
 
-Navigate to Tools -> Device Manager, and start the Android device you've created.
+In order to build the project properly you may need to open in a new window just the `android` folder of this repo, by itself. 
 
-From the top menu bar, click the play button to run main.dart. You can also click Run -> Start Debugging from the top menu. This should launch the application inside of the Device Tools sidebar.
+Doing this should fully import the project into Android Studio, and it will attempt to build the project. 
 
-#### Helpful Tips
+If it fails you may see an error message with a link to upgrade the Gradle version. Click the link with the highest version, and it will retry the build.
 
-If you get an error that your gradle version is incompatible, open the project in Android Studio. Upon opening the project, you will be prompted to upgrade gradle and re-sync the project. Click to do so and follow any remaining steps recommended in the UI. Then, you can try running the app again as described above.
+After this the IDE may prompt additional suggestions if there are still issues, such as re-syncing the project or upgrading compileSDK versions.
 
-If you are experiencing errors with gradle, and you're unable to run a gradle sync, try opening just the `android` folder of this repo within Android Studio and try again.
+The compileSDK version can be incremented in the `build.gradle` file located in the `/android/app` directory.
 
-If you upgrade gradle and see any errors related to updating the compileSDK version, you can adjust the compileSDK version in the build.gradle file located in the /android/app directory.
+Once all built, navigate to Tools -> Device Manager, and start the Android device you've created.
+
+From the top menu bar, click the play button to run main.dart. You can also click Run -> Start Debugging from the top menu. This should launch the application inside the Device Tools sidebar.
 
 ### Create and Point to Your Own Environment
 
 You will want to point this application to your own AIC tenant and IG instance. In order to do so, you will need to create a Baseline Demo environment in Encore, which comes with both.
 
-1. In IG, you will need to configure a /transfer route. Please use the demo-app-ig-route-transfer.json file located in /config-files as a reference for your own route configuration. The following values will need to be updated:
+1. In IG, you will need to configure a /transfer route. Please use the `demo-app-ig-route-transfer.json` file located in `/config-files` as a reference for your own route configuration. The following values will need to be updated:
    - `baseURI`: Set to `http://baseline-demo:8082`.
    - `tenantCookieName`
    - `amInstanceUrl`
    - `agent.password`: Create an IG Agent in AIC, take the password and base64 encode it.
-   - `AmService` values: Set `agent.username` to the IG Agent created. Update the `ssoTokenHeader` and `url` values too.
+   - `AmService` values: Set `agent.username` to the IG Agent created. Update the `ssoTokenHeader` (same as cookie name) and `url` values too.
 
 2. Then, navigate to your cloud tenant and create an authorization policy. A reference image of the policy is located in `/config-files/Authorization-Policy-Transfer-Sample-Flutter-Mobile-App.png`. Make sure that the id of the policy set matches the `PolicyEnforcementFilter.application` value in the IG route in the previous step (in the sample the id is `data` and name is `Baseline-Demo`).
 
@@ -59,6 +61,7 @@ You will want to point this application to your own AIC tenant and IG instance. 
    - Take a note of your client ID as it'll be needed later.
    - Sign-in URL `org.forgerock.demo://oauth2redirect`.
    - Token Endpoint Authentication Method to None.
+   - Scopes must match what is in `android/app/src/main/res/values/strings.xml`.
 
 4. In the cloud tenant, you will want to import the journeys located in `/config-files`. Please note that these are reference journeys. For the WebAuthN nodes to work, you must run the app on a physical device. If you can only use an emulator, then you will need to rewire the journeys to avoid the WebAuthn nodes. See later steps for more info on the WebAuthn nodes.
 
@@ -68,11 +71,11 @@ You will want to point this application to your own AIC tenant and IG instance. 
 
 6. To get the WebAuthN nodes working you must have a physical Android device to work with. First, follow the first section of this guide until you are required to host an `assetlinks.json` file: [Android Mobile Biometrics](https://docs.pingidentity.com/sdks/latest/sdks/use-cases/mobile-biometrics/android/index.html)
 
-7. Connect to your IG K8s pod ([instructions here](https://pingidentity.atlassian.net/wiki/spaces/SE1/pages/688062515/HOW+TO+ForgeRock+-+SE+Devops+setup+-+Quick+Starting+guide)), and create an `assetlinks.json` file in `/var/ig/config/public` with the required content from the previous guide.
+7. Connect to your IG K8s pod ([instructions here](https://pingidentity.atlassian.net/wiki/spaces/SE1/pages/688062515/HOW+TO+ForgeRock+-+SE+Devops+setup+-+Quick+Starting+guide)), and create the folder `/var/ig/config/public` and then creating an `assetlinks.json` in there with the required content from the Biometrics guide in the previous step.
 
 8. Import the IG route `ig-route-01-asset-links.json` that will serve the file at `https://<baseline-url>/.well-known/assetlinks.json`. Verify it works by going directly to that URL and you should see the content of your file.
 
-9. Follow the steps in the second section of the previous guide to configure the WebAuthn nodes, then run the app from your physical device following [these steps](https://developer.android.com/codelabs/basic-android-kotlin-compose-connect-device#0).
+9. Follow the steps in the second section of the Biometrics guide to configure the WebAuthn nodes, then run the app from your physical device following [these steps](https://developer.android.com/codelabs/basic-android-kotlin-compose-connect-device#0).
 
 #### Helpful Tips
 
